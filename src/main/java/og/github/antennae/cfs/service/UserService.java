@@ -2,9 +2,9 @@ package og.github.antennae.cfs.service;
 
 import og.github.antennae.cfs.entity.User;
 import og.github.antennae.cfs.entity.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class UserService {
 
-    @Inject
+    @Autowired
     UserDao userDao;
 
     public User getUser( String email ){

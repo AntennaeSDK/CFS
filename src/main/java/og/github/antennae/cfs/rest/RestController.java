@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import og.github.antennae.cfs.entity.User;
 import og.github.antennae.cfs.service.UserService;
 import og.github.antennae.cfs.service.VersionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitterAdapter;
 
-import javax.inject.Inject;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -22,13 +22,13 @@ import java.util.Date;
  *
  */
 @Component
-@Path("/api")
+@Path("/")
 public class RestController {
 
-    @Inject
+    @Autowired
     VersionService versionService;
 
-    @Inject
+    @Autowired
     UserService userService;
 
     @GET
