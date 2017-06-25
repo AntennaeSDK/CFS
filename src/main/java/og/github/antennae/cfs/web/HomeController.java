@@ -12,7 +12,7 @@ import java.util.Date;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
 
         Date currentTime = Calendar.getInstance().getTime();
