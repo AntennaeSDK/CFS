@@ -1,4 +1,4 @@
-package og.github.antennae.cfs.rest;
+package org.github.antennae.cfs.rest;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;

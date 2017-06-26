@@ -1,7 +1,7 @@
-package og.github.antennae.cfs.service;
+package org.github.antennae.cfs.service;
 
-import og.github.antennae.cfs.entity.User;
-import og.github.antennae.cfs.entity.UserDao;
+import org.github.antennae.cfs.entity.User;
+import org.github.antennae.cfs.entity.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

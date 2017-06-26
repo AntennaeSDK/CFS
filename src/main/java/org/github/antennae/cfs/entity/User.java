@@ -1,4 +1,4 @@
-package og.github.antennae.cfs.entity;
+package org.github.antennae.cfs.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

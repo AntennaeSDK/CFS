@@ -1,4 +1,4 @@
-package og.github.antennae.cfs;
+package org.github.antennae.cfs;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

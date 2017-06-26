@@ -1,10 +1,10 @@
-package og.github.antennae.cfs.rest;
+package org.github.antennae.cfs.rest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import og.github.antennae.cfs.entity.User;
-import og.github.antennae.cfs.service.UserService;
-import og.github.antennae.cfs.service.VersionService;
+import org.github.antennae.cfs.entity.User;
+import org.github.antennae.cfs.service.UserService;
+import org.github.antennae.cfs.service.VersionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

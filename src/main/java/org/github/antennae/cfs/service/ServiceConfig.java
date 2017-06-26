@@ -1,4 +1,4 @@
-package og.github.antennae.cfs.service;
+package org.github.antennae.cfs.service;
 
 /**
  * Created by nsankaran on 6/23/17.
