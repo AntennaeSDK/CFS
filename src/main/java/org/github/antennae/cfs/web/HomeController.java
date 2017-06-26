@@ -1,7 +1,7 @@
 package org.github.antennae.cfs.web;
 
 
-import org.github.antennae.cfs.microsoft.auth.AuthHelper;
+import org.github.antennae.cfs.microsoft.AuthHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
