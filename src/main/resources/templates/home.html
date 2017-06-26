@@ -20,66 +20,63 @@
             integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="/css/main.css" />
 
 
 </head>
 <body>
 
-    <div id="app" >
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav float-right">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">APIs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+            </ul>
+        </nav>
+        <h2 class="text-muted">CFS</h2>
+    </div>
 
-        <div id="primary-nav" class="bg-primary">
-            <div class="container">
-            <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary">
+    <div class="jumbotron">
+        <h1 class="display-5">Continous Feedback System</h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+    </div>
 
-                <button class="navbar-toggler navbar-toggler-right" type="button"
-                        data-toggle="collapse" data-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <a class="navbar-brand" href="#">CFS</a>
-                <div id="navbarNavDropdown" class="navbar-collapse collapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">APIs</a>
-                        </li>
-
-                    </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/login') }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/register') }}">Register</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            </div>
-        </div>
-
-        <div class="container">
-
+    <div class="row">
+        <div class="col-lg-6">
             <h3>Welcome!</h3>
             <div class="starter-template">
 
                 <p th:text="'Hello, ' + ${name} + '!'" />
                 <p th:text="'Date, ' + ${date} + '!'" />
             </div>
-
         </div>
     </div>
 
 
-    <!-- /.container -->
 
+    <!--<footer class="footer">-->
+            <!--<p>&copy; Company 2017</p>-->
+    <!--</footer>-->
+
+</div> <!-- /container -->
 
 
 </body>
+
+
 </html>
