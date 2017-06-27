@@ -108,7 +108,7 @@ public class AuthHelper {
 
                 authProps.load(authConfigStream);
 
-                if( appId != null || appId.trim().isEmpty()) {
+                if( appId == null || appId.trim().isEmpty()) {
                     appId = authProps.getProperty("MS.APPID");
                 }
 
