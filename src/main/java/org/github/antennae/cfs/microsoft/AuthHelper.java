@@ -6,9 +6,14 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class AuthHelper {
+
+    private static Logger logger = LoggerFactory.getLogger(AuthHelper.class);
+
     private static final String authority = "https://login.microsoftonline.com";
     private static final String authorizeUrl = authority + "/common/oauth2/v2.0/authorize";
 
@@ -32,6 +37,9 @@ public class AuthHelper {
                 return null;
             }
         }
+
+        logger.info("APPID: "+ appId);
+
         return appId;
     }
     private static String getAppPassword() {
@@ -42,6 +50,9 @@ public class AuthHelper {
                 return null;
             }
         }
+
+        logger.info("APP_PASSWORD: "+ appPassword);
+
         return appPassword;
     }
 
@@ -53,6 +64,9 @@ public class AuthHelper {
                 return null;
             }
         }
+
+        logger.info("REDIRECT_URL: "+ redirectUrl );
+
         return redirectUrl;
     }
 
@@ -96,6 +110,7 @@ public class AuthHelper {
                 }else{
                     redirectUrl = redirectUrlEnv;
                 }
+
 
             } finally {
                 authConfigStream.close();
