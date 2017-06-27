@@ -3,6 +3,7 @@ package org.github.antennae.cfs.microsoft;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -89,8 +90,10 @@ public class AuthHelper {
 
                 authProps.load(authConfigStream);
 
+                Map<String,String> envs = System.getenv();
+
                 // ENV variables take precedence
-                String appIdEnv = System.getenv("MS.APPID");
+                String appIdEnv = envs.get("MS.APPID");
                 if( appIdEnv == null || appIdEnv.trim().isEmpty()) {
                     System.out.println("appIdEnv is NULL");
                     appId = authProps.getProperty("MS.APPID");
@@ -98,14 +101,14 @@ public class AuthHelper {
                     appId = appIdEnv;
                 }
 
-                String appPasswordEnv = System.getenv("MS.APP_PASSWORD");
+                String appPasswordEnv = envs.get("MS.APP_PASSWORD");
                 if( appPasswordEnv == null || appPasswordEnv.trim().isEmpty()) {
                     appPassword = authProps.getProperty("MS.APP_PASSWORD");
                 }else{
                     appPassword = appPasswordEnv;
                 }
 
-                String redirectUrlEnv = System.getenv("MS.REDIRECT_URL");
+                String redirectUrlEnv = envs.get("MS.REDIRECT_URL");
                 if( redirectUrlEnv == null || redirectUrlEnv.trim().isEmpty()){
                     redirectUrl = authProps.getProperty("MS.REDIRECT_URL");
                 }else{
