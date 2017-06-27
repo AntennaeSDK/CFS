@@ -1,4 +1,15 @@
 <!DOCTYPE HTML>
+
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
+
+<%
+    boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
+%>
+
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
@@ -43,7 +54,11 @@
                     <a class="nav-link" href="#">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <%if(isLoggedIn){%>
+                        <a class="nav-link" href="/logout" >Logout</a>
+                    <%}else{%>
+                        <a class="nav-link" href="${loginUrl}" >Login</a>
+                    <%}%>
                 </li>
             </ul>
         </nav>

@@ -1,8 +1,6 @@
 package org.github.antennae.cfs.web;
 
-import org.github.antennae.cfs.microsoft.AuthHelper;
-import org.github.antennae.cfs.microsoft.IdToken;
-import org.github.antennae.cfs.microsoft.TokenResponse;
+import org.github.antennae.cfs.microsoft.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -51,6 +50,17 @@ public class MicrosoftAuthorizeController {
                     session.setAttribute("userTenantId", idTokenObj.getTenantId());
 
                     model.addAttribute("accessToken", tokenResponse.getAccessToken());
+
+                    // Get user info
+                    IOutlookService outlookService = OutlookServiceBuilder.getOutlookService(tokenResponse.getAccessToken(), null);
+                    OutlookUser user;
+                    try {
+                        user = outlookService.getCurrentUser().execute().body();
+                        session.setAttribute("userEmail", user.getMail());
+                    } catch (IOException e) {
+                        session.setAttribute("error", e.getMessage());
+                    }
+
                 } else {
                     session.setAttribute("error", "ID token failed validation.");
                 }
@@ -59,6 +69,11 @@ public class MicrosoftAuthorizeController {
                 session.setAttribute("error", "Unexpected state returned from authority.");
             }
 
+            boolean isLoggedIn = false;
+            if( session.getAttribute("userName") != null ){
+                isLoggedIn = true;
+            }
+            model.addAttribute("isLoggedIn", isLoggedIn);
             model.addAttribute("authCode", code);
             model.addAttribute("idToken", idToken);
 
