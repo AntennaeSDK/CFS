@@ -38,6 +38,8 @@ public class HomeController {
 
         String loginUrl = AuthHelper.getLoginUrl(state, nonce);
 
+        model.addAttribute("loginUrl", loginUrl);
+
         return "home";
     }
 

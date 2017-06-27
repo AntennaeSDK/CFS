@@ -1,5 +1,6 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
+src/main/resources/auth.properties
 
 ### STS ###
 .apt_generated
@@ -15,6 +16,7 @@ target/
 *.iml
 *.ipr
 
+
 ### NetBeans ###
 nbproject/private/
 build/
@@ -22,3 +24,5 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+src/test/java/og/

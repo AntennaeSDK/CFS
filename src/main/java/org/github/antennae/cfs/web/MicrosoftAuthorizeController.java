@@ -1,6 +1,7 @@
 package org.github.antennae.cfs.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +21,10 @@ public class MicrosoftAuthorizeController {
             @RequestParam("code") String code,
             @RequestParam("id_token") String idToken,
             @RequestParam("state") UUID state,
-            HttpServletRequest request) {
+            HttpServletRequest request,
+            Model model) {
         {
+
             // Get the expected state value from the session
             HttpSession session = request.getSession();
             UUID expectedState = (UUID) session.getAttribute("expected_state");
@@ -35,7 +38,11 @@ public class MicrosoftAuthorizeController {
             } else {
                 session.setAttribute("error", "Unexpected state returned from authority.");
             }
-            return "mail";
+
+            model.addAttribute("authCode", code);
+            model.addAttribute("idToken", idToken);
+
+            return "auth";
         }
     }
 
