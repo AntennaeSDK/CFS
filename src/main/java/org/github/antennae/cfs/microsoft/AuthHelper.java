@@ -38,7 +38,7 @@ public class AuthHelper {
             }
         }
 
-        logger.info("APPID: "+ appId);
+        System.out.println("APPID: ["+ appId+ "]");
 
         return appId;
     }
@@ -51,7 +51,7 @@ public class AuthHelper {
             }
         }
 
-        logger.info("APP_PASSWORD: "+ appPassword);
+        System.out.println("APP_PASSWORD: ["+ appPassword + "]");
 
         return appPassword;
     }
@@ -65,7 +65,7 @@ public class AuthHelper {
             }
         }
 
-        logger.info("REDIRECT_URL: "+ redirectUrl );
+        System.out.println("REDIRECT_URL: ["+ redirectUrl + "]");
 
         return redirectUrl;
     }
