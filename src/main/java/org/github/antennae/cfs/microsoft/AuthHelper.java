@@ -85,17 +85,17 @@ public class AuthHelper {
         Map<String,String> envs = System.getenv();
 
         String appIdEnv = envs.get("MS.APPID");
-        if( appIdEnv != null && appIdEnv.trim().isEmpty()){
+        if( appIdEnv != null && !appIdEnv.trim().isEmpty()){
             appId = appIdEnv;
         }
 
         String appPasswordEnv = envs.get("MS.APP_PASSWORD");
-        if( appPasswordEnv != null && appPasswordEnv.trim().isEmpty()){
+        if( appPasswordEnv != null && !appPasswordEnv.trim().isEmpty()){
             appPassword = appPasswordEnv;
         }
 
         String redirectUrlEnv = envs.get("MS.REDIRECT_URL");
-        if(redirectUrlEnv != null && redirectUrlEnv.trim().isEmpty()){
+        if(redirectUrlEnv != null && !redirectUrlEnv.trim().isEmpty()){
             redirectUrl = redirectUrlEnv;
         }
 
