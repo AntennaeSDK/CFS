@@ -92,6 +92,7 @@ public class AuthHelper {
                 // ENV variables take precedence
                 String appIdEnv = System.getenv("MS.APPID");
                 if( appIdEnv == null || appIdEnv.trim().isEmpty()) {
+                    System.out.println("appIdEnv is NULL");
                     appId = authProps.getProperty("MS.APPID");
                 }else{
                     appId = appIdEnv;
