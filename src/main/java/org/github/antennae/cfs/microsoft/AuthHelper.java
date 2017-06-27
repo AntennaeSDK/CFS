@@ -7,9 +7,13 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriComponentsBuilder;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class AuthHelper {
 
@@ -142,5 +146,36 @@ public class AuthHelper {
         urlBuilder.queryParam("response_mode", "form_post");
 
         return urlBuilder.toUriString();
+    }
+
+    public static TokenResponse getTokenFromAuthCode(String authCode, String tenantId) {
+
+        // Create a logging interceptor to log request and responses
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor).build();
+
+
+        // Create and configure the Retrofit object
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(authority)
+                .client(client)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build();
+
+        // Generate the token service
+        ITokenService tokenService = retrofit.create(ITokenService.class);
+
+        try {
+            return tokenService.getAccessTokenFromAuthCode(tenantId, getAppId(), getAppPassword(),
+                    "authorization_code", authCode, getRedirectUrl()).execute().body();
+        } catch (IOException e) {
+            TokenResponse error = new TokenResponse();
+            error.setError("IOException");
+            error.setErrorDescription(e.getMessage());
+            return error;
+        }
     }
 }
