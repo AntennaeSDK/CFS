@@ -62,7 +62,6 @@ public class MicrosoftAuthorizeController {
             model.addAttribute("authCode", code);
             model.addAttribute("idToken", idToken);
 
-
             return "auth";
         }
     }

@@ -1,4 +1,15 @@
 <!DOCTYPE HTML>
+
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
+
+<%
+System.out.println("HHHHHHHH");
+boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
+%>
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
@@ -40,7 +51,11 @@
                     <a class="nav-link" href="#">APIs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:if="${isLoggedIn}" th:href="@{${loginUrl}}" >Login</a>
+                    <%if(isLoggedIn){%>
+                    <a class="nav-link" href="/logout" >Logout</a>
+                    <%}else{%>
+                        <a class="nav-link" href="${loginUrl}" >Login</a>
+                    <%}%>
                 </li>
             </ul>
         </nav>
@@ -62,13 +77,6 @@
     <div class="row">
         <div class="col-lg-6">
             <h3>Welcome!</h3>
-            <div class="starter-template">
-
-                <p th:text="'Hello, ' + ${name} + '!'" />
-                <p th:text="'Date, ' + ${date} + '!'" />
-                <p th:text="'login url' + ${loginUrl}"/>
-                <a th:href="@{${loginUrl}}" >Microsoft Login URL</a>
-            </div>
         </div>
     </div>
 

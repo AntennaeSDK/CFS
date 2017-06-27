@@ -40,7 +40,10 @@
                     <a class="nav-link" href="#">APIs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:if="${isLoggedIn}" th:href="@{${loginUrl}}" >Login</a>
+                    <a class="nav-link" href="#">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
                 </li>
             </ul>
         </nav>
@@ -60,22 +63,23 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
-            <h3>Welcome!</h3>
-            <div class="starter-template">
+        <div class="col-lg-12">
+            <h3>Microsoft Auth</h3>
+                <p>AuthCode</p>
+                <p>${authCode}"</p>
 
-                <p th:text="'Hello, ' + ${name} + '!'" />
-                <p th:text="'Date, ' + ${date} + '!'" />
-                <p th:text="'login url' + ${loginUrl}"/>
-                <a th:href="@{${loginUrl}}" >Microsoft Login URL</a>
-            </div>
+                <p>ID Token</p>
+                <p>${idToken}</p>
+
+                <p>Access Token</p>
+                <p>${accessToken}</p>
         </div>
     </div>
 
 
 
     <!--<footer class="footer">-->
-            <!--<p>&copy; Company 2017</p>-->
+    <!--<p>&copy; Company 2017</p>-->
     <!--</footer>-->
 
 </div> <!-- /container -->
