@@ -81,6 +81,24 @@ public class AuthHelper {
 
     private static void loadConfig() throws IOException {
         String authConfigFile = "auth.properties";
+
+        Map<String,String> envs = System.getenv();
+
+        String appIdEnv = envs.get("MS.APPID");
+        if( appIdEnv != null && appIdEnv.trim().isEmpty()){
+            appId = appIdEnv;
+        }
+
+        String appPasswordEnv = envs.get("MS.APP_PASSWORD");
+        if( appPasswordEnv != null && appPasswordEnv.trim().isEmpty()){
+            appPassword = appPasswordEnv;
+        }
+
+        String redirectUrlEnv = envs.get("MS.REDIRECT_URL");
+        if(redirectUrlEnv != null && redirectUrlEnv.trim().isEmpty()){
+            redirectUrl = redirectUrlEnv;
+        }
+
         InputStream authConfigStream = AuthHelper.class.getClassLoader().getResourceAsStream(authConfigFile);
 
         if (authConfigStream != null) {
@@ -90,31 +108,18 @@ public class AuthHelper {
 
                 authProps.load(authConfigStream);
 
-                Map<String,String> envs = System.getenv();
-
-                // ENV variables take precedence
-                String appIdEnv = envs.get("MS.APPID");
-                if( appIdEnv == null || appIdEnv.trim().isEmpty()) {
-                    System.out.println("appIdEnv is NULL");
+                if( appId != null || appId.trim().isEmpty()) {
                     appId = authProps.getProperty("MS.APPID");
-                }else{
-                    appId = appIdEnv;
                 }
 
-                String appPasswordEnv = envs.get("MS.APP_PASSWORD");
-                if( appPasswordEnv == null || appPasswordEnv.trim().isEmpty()) {
+
+                if( appPassword == null || appPassword.trim().isEmpty()) {
                     appPassword = authProps.getProperty("MS.APP_PASSWORD");
-                }else{
-                    appPassword = appPasswordEnv;
                 }
 
-                String redirectUrlEnv = envs.get("MS.REDIRECT_URL");
-                if( redirectUrlEnv == null || redirectUrlEnv.trim().isEmpty()){
+                if( redirectUrl == null || redirectUrl.trim().isEmpty()){
                     redirectUrl = authProps.getProperty("MS.REDIRECT_URL");
-                }else{
-                    redirectUrl = redirectUrlEnv;
                 }
-
 
             } finally {
                 authConfigStream.close();
