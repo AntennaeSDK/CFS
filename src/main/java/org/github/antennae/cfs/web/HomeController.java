@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -37,6 +38,10 @@ public class HomeController {
         session.setAttribute("expected_nonce", nonce);
 
         String loginUrl = AuthHelper.getLoginUrl(state, nonce);
+
+        Map<String,String> env = System.getenv();
+
+        System.out.println("ENV \n"+ env);
 
         model.addAttribute("loginUrl", loginUrl);
 
