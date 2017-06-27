@@ -70,11 +70,33 @@ public class AuthHelper {
 
         if (authConfigStream != null) {
             Properties authProps = new Properties();
+
             try {
+
                 authProps.load(authConfigStream);
-                appId = authProps.getProperty("appId");
-                appPassword = authProps.getProperty("appPassword");
-                redirectUrl = authProps.getProperty("redirectUrl");
+
+                // ENV variables take precedence
+                String appIdEnv = System.getenv("MS.APPID");
+                if( appIdEnv == null || appIdEnv.trim().isEmpty()) {
+                    appId = authProps.getProperty("MS.APPID");
+                }else{
+                    appId = appIdEnv;
+                }
+
+                String appPasswordEnv = System.getenv("MS.APP_PASSWORD");
+                if( appPasswordEnv == null || appPasswordEnv.trim().isEmpty()) {
+                    appPassword = authProps.getProperty("MS.APP_PASSWORD");
+                }else{
+                    appPassword = appPasswordEnv;
+                }
+
+                String redirectUrlEnv = System.getenv("MS.REDIRECT_URL");
+                if( redirectUrlEnv == null || redirectUrlEnv.trim().isEmpty()){
+                    redirectUrl = authProps.getProperty("MS.REDIRECT_URL");
+                }else{
+                    redirectUrl = redirectUrlEnv;
+                }
+
             } finally {
                 authConfigStream.close();
             }
