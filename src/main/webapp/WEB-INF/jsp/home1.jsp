@@ -6,7 +6,7 @@
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
 
 <%
-System.out.println("HHHHHHHH");
+//System.out.println("HHHHHHHH");
 boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
 %>
 

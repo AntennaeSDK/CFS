@@ -1,6 +1,8 @@
 package org.github.antennae.cfs.web;
 
 import org.github.antennae.cfs.microsoft.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,8 @@ import java.util.UUID;
 @Controller
 public class MicrosoftAuthorizeController {
 
+    private static Logger logger = LoggerFactory.getLogger(MicrosoftAuthorizeController.class);
+
     @RequestMapping(value="/authorize", method= RequestMethod.POST)
     public String authorize(
             @RequestParam("code") String code,
@@ -26,6 +30,8 @@ public class MicrosoftAuthorizeController {
             HttpServletRequest request,
             Model model) {
         {
+
+            logger.info("POST /authorize received.");
 
             // Get the expected state value from the session
             HttpSession session = request.getSession();

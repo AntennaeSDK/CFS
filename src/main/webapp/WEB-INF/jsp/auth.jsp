@@ -80,6 +80,8 @@
     <div class="row">
         <div class="col-lg-12">
             <h3>Microsoft Auth</h3>
+
+                <!--
                 <p>AuthCode</p>
                 <p>${authCode}"</p>
 
@@ -88,6 +90,7 @@
 
                 <p>Access Token</p>
                 <p>${accessToken}</p>
+                -->
         </div>
     </div>
 

@@ -2,6 +2,8 @@ package org.github.antennae.cfs.web;
 
 
 import org.github.antennae.cfs.microsoft.AuthHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,8 @@ import java.util.UUID;
 
 @Controller
 public class HomeController {
+
+    private static Logger logger = LoggerFactory.getLogger(HomeController.class);
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(@RequestParam(value="name", required=false, defaultValue="World") String name,
@@ -42,9 +46,11 @@ public class HomeController {
         }
 
         String loginUrl = AuthHelper.getLoginUrl(state, nonce);
+        logger.info("Microsoft Login URL: "+ loginUrl );
 
-        Map<String,String> env = System.getenv();
-        System.out.println("ENV \n"+ env);
+        //Map<String,String> env = System.getenv();
+        //System.out.println("ENV \n"+ env);
+
 
         model.addAttribute("loginUrl", loginUrl);
         model.addAttribute("isLoggedIn", isLoggedIn);
