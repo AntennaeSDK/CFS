@@ -23,10 +23,17 @@ public class MailController {
         HttpSession session = request.getSession();
         TokenResponse tokens = (TokenResponse)session.getAttribute("tokens");
 
+        boolean isLoggedIn = false;
+        if( session.getAttribute("userName") != null ){
+            isLoggedIn = true;
+            model.addAttribute("isLoggedIn", isLoggedIn);
+        }
+
+
         if (tokens == null) {
             // No tokens in session, user needs to sign in
             redirectAttributes.addFlashAttribute("error", "Please sign in to continue.");
-            return "redirect:/index.html";
+            return "redirect:/";
         }
 
         String tenantId = (String)session.getAttribute("userTenantId");
@@ -56,6 +63,8 @@ public class MailController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/index.html";
         }
+
+
 
         return "mail";
     }

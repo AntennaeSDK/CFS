@@ -45,7 +45,7 @@ boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
                     <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="/mail">Mail</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">APIs</a>

@@ -1,11 +1,14 @@
 package org.github.antennae.cfs.microsoft;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by nsankaran on 6/27/17.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PagedResult<T> {
+
     @JsonProperty("@odata.nextLink")
     private String nextPageLink;
     private T[] value;

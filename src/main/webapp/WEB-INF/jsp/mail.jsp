@@ -7,9 +7,11 @@
 <%@ page import="org.github.antennae.cfs.microsoft.Message" %>
 
 <%
-boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
+Boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
+Message[] messages = (Message[]) request.getAttribute("messages");
 
-Message[] messages = (Messages[]) request.getAttribute("messages");
+System.out.println("loggedin = "+ isLoggedIn );
+System.out.println("messages = " + messages.length);
 %>
 
 
@@ -48,7 +50,7 @@ Message[] messages = (Messages[]) request.getAttribute("messages");
                     <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="/mail">mail</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">APIs</a>
@@ -58,9 +60,9 @@ Message[] messages = (Messages[]) request.getAttribute("messages");
                 </li>
                 <li class="nav-item">
                     <%if(isLoggedIn){%>
-                    <a class="nav-link" href="/logout" >Logout</a>
+                        <a class="nav-link" href="/logout" >Logout</a>
                     <%}else{%>
-                    <a class="nav-link" href="${loginUrl}" >Login</a>
+                        <a class="nav-link" href="/login" >Login</a>
                     <%}%>
                 </li>
             </ul>
@@ -74,10 +76,6 @@ Message[] messages = (Messages[]) request.getAttribute("messages");
 
             <p>Login Successful</p>
 
-            <div>
-                <p>Name: <%=name%> </p>
-                <p>Email: <%=email%> </p>
-            </div>
             <table class="table">
                 <caption>Inbox</caption>
                 <thead>
@@ -102,10 +100,10 @@ Message[] messages = (Messages[]) request.getAttribute("messages");
                             <%=m.getSubject()%>
                         </td>
                         <td>
-                            <%=m.getReceivedDate()%>
+                            <%=m.getReceivedDateTime()%>
                         </td>
                         <td>
-                            <%=m.m.getBodyPreview()%>
+                            <%=m.getBodyPreview()%>
                         </td>
                     </tr>
                 <%}%>
