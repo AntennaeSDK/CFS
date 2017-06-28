@@ -38,6 +38,7 @@ public class MicrosoftAuthorizeController {
             UUID expectedState = (UUID) session.getAttribute("expected_state");
             UUID expectedNonce = (UUID) session.getAttribute("expected_nonce");
 
+            OutlookUser user;
 
             // Make sure that the state query parameter returned matches
             // the expected state
@@ -59,10 +60,13 @@ public class MicrosoftAuthorizeController {
 
                     // Get user info
                     IOutlookService outlookService = OutlookServiceBuilder.getOutlookService(tokenResponse.getAccessToken(), null);
-                    OutlookUser user;
                     try {
                         user = outlookService.getCurrentUser().execute().body();
                         session.setAttribute("userEmail", user.getMail());
+
+                        model.addAttribute("email", user.getMail());
+                        model.addAttribute("name", user.getDisplayName());
+
                     } catch (IOException e) {
                         session.setAttribute("error", e.getMessage());
                     }
@@ -82,6 +86,7 @@ public class MicrosoftAuthorizeController {
             model.addAttribute("isLoggedIn", isLoggedIn);
             model.addAttribute("authCode", code);
             model.addAttribute("idToken", idToken);
+
 
             return "auth";
         }

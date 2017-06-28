@@ -4,6 +4,7 @@ import org.github.antennae.cfs.microsoft.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +17,12 @@ import java.io.IOException;
 @Controller
 public class MailController {
 
-    @RequestMapping("/mail")
+    @RequestMapping(value = "/mail", method = RequestMethod.GET)
     public String mail(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+
         HttpSession session = request.getSession();
         TokenResponse tokens = (TokenResponse)session.getAttribute("tokens");
+
         if (tokens == null) {
             // No tokens in session, user needs to sign in
             redirectAttributes.addFlashAttribute("error", "Please sign in to continue.");
@@ -27,11 +30,9 @@ public class MailController {
         }
 
         String tenantId = (String)session.getAttribute("userTenantId");
-
         tokens = AuthHelper.ensureTokens(tokens, tenantId);
 
         String email = (String)session.getAttribute("userEmail");
-
         IOutlookService outlookService = OutlookServiceBuilder.getOutlookService(tokens.getAccessToken(), email);
 
         // Retrieve messages from the inbox

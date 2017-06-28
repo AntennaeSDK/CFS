@@ -4,11 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
+<%@ page import="org.github.antennae.cfs.microsoft.Message" %>
 
 <%
-    boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
-    String name = (String) request.getAttribute("name");
-    String email = (String) request.getAttribute("email");
+boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
+
+Message[] messages = (Messages[]) request.getAttribute("messages");
 %>
 
 
@@ -57,9 +58,9 @@
                 </li>
                 <li class="nav-item">
                     <%if(isLoggedIn){%>
-                        <a class="nav-link" href="/logout" >Logout</a>
+                    <a class="nav-link" href="/logout" >Logout</a>
                     <%}else{%>
-                        <a class="nav-link" href="${loginUrl}" >Login</a>
+                    <a class="nav-link" href="${loginUrl}" >Login</a>
                     <%}%>
                 </li>
             </ul>
@@ -71,22 +72,46 @@
         <div class="col-lg-12">
             <h3>Microsoft Auth</h3>
 
-                <p>Login Successful</p>
+            <p>Login Successful</p>
 
-                <div>
-                    <p>Name: <%=name%> </p>
-                    <p>Email: <%=email%> </p>
-                </div>
-                <!--
-                <p>AuthCode</p>
-                <p>${authCode}"</p>
+            <div>
+                <p>Name: <%=name%> </p>
+                <p>Email: <%=email%> </p>
+            </div>
+            <table class="table">
+                <caption>Inbox</caption>
+                <thead>
+                <tr>
+                    <th><span class="glyphicon glyphicon-envelope"></span></th>
+                    <th>From</th>
+                    <th>Subject</th>
+                    <th>Received</th>
+                    <th>Preview</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%for( Message m : messages){%>
+                    <tr class="info">
+                        <td>
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </td>
+                        <td>
+                            <%=m.getFrom().getEmailAddress().getName()%>
+                        </td>
+                        <td>
+                            <%=m.getSubject()%>
+                        </td>
+                        <td>
+                            <%=m.getReceivedDate()%>
+                        </td>
+                        <td>
+                            <%=m.m.getBodyPreview()%>
+                        </td>
+                    </tr>
+                <%}%>
 
-                <p>ID Token</p>
-                <p>${idToken}</p>
-
-                <p>Access Token</p>
-                <p>${accessToken}</p>
-                -->
+                </tbody>
+            </table>
         </div>
     </div>
 
