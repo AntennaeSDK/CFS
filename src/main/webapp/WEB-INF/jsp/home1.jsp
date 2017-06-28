@@ -42,7 +42,7 @@ boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
         <nav>
             <ul class="nav float-right">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Features</a>
@@ -63,16 +63,17 @@ boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
     </div>
 
     <div class="jumbotron">
-        <h1 class="display-5">Continous Feedback System</h1>
+
         <p class="lead">
-            Enhance day-to-day life of software folks by</p>
+            Enhance day-to-day life of <i><b>software/quality engineers, people/product/program managers</b></i>  by</p>
         <ul>
-            <li>Simplified meetings</li>
-            <li>Collection continuous feedback</li>
-            <li>Proviing Personal Metrics</li>
+            <li>Simplifying meetings</li>
+            <li>Collecting continuous feedback</li>
+            <li>Providing personal metrics</li>
         </ul>
         <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
     </div>
+
 
     <div class="row">
         <div class="col-lg-6">
