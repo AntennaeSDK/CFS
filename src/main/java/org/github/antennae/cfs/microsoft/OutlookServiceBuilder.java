@@ -17,9 +17,12 @@ import java.util.UUID;
 public class OutlookServiceBuilder {
 
     public static IOutlookService getOutlookService(String accessToken, String userEmail) {
+
+
         // Create a request interceptor to add headers that belong on
         // every request
         Interceptor requestInterceptor = new Interceptor() {
+
             @Override
             public Response intercept(Interceptor.Chain chain) throws IOException {
                 Request original = chain.request();
@@ -43,10 +46,11 @@ public class OutlookServiceBuilder {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(requestInterceptor)
-                .addInterceptor(loggingInterceptor)
-                .build();
+        OkHttpClient client = new OkHttpClient
+                                        .Builder()
+                                        .addInterceptor(requestInterceptor)
+                                        .addInterceptor(loggingInterceptor)
+                                        .build();
 
         // Create and configure the Retrofit object
         Retrofit retrofit = new Retrofit.Builder()

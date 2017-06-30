@@ -24,7 +24,7 @@ public class MicrosoftAuthorizeController {
 
     @RequestMapping(value="/authorize", method= RequestMethod.POST)
     public String authorize(
-            @RequestParam("code") String code,
+            @RequestParam("code") String authCode,
             @RequestParam("id_token") String idToken,
             @RequestParam("state") UUID state,
             HttpServletRequest request,
@@ -50,8 +50,9 @@ public class MicrosoftAuthorizeController {
                 IdToken idTokenObj = IdToken.parseEncodedToken(idToken, expectedNonce.toString());
 
                 if (idTokenObj != null) {
-                    TokenResponse tokenResponse = AuthHelper.getTokenFromAuthCode(code, idTokenObj.getTenantId());
-                    session.setAttribute("tokens", tokenResponse);
+
+                    TokenResponse tokenResponse = AuthHelper.getTokenFromAuthCode(authCode, idTokenObj.getTenantId());
+                    session.setAttribute("tokenS", tokenResponse);
                     session.setAttribute("userConnected", true);
                     session.setAttribute("userName", idTokenObj.getName());
                     session.setAttribute("userTenantId", idTokenObj.getTenantId());
@@ -60,6 +61,7 @@ public class MicrosoftAuthorizeController {
 
                     // Get user info
                     IOutlookService outlookService = OutlookServiceBuilder.getOutlookService(tokenResponse.getAccessToken(), null);
+
                     try {
                         user = outlookService.getCurrentUser().execute().body();
                         session.setAttribute("userEmail", user.getMail());
@@ -84,7 +86,7 @@ public class MicrosoftAuthorizeController {
                 isLoggedIn = true;
             }
             model.addAttribute("isLoggedIn", isLoggedIn);
-            model.addAttribute("authCode", code);
+            model.addAttribute("authCode", authCode);
             model.addAttribute("idToken", idToken);
 
 

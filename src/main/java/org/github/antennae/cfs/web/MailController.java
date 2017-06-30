@@ -44,10 +44,13 @@ public class MailController {
 
         // Retrieve messages from the inbox
         String folder = "inbox";
+
         // Sort by time received in descending order
         String sort = "receivedDateTime DESC";
+
         // Only return the properties we care about
         String properties = "receivedDateTime,from,isRead,subject,bodyPreview";
+
         // Return at most 10 messages
         Integer maxResults = 10;
 
@@ -63,8 +66,6 @@ public class MailController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/index.html";
         }
-
-
 
         return "mail";
     }
