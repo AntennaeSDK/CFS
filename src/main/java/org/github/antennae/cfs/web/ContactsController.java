@@ -14,17 +14,17 @@ import java.io.IOException;
  * Created by nsankaran on 6/30/17.
  */
 @Controller
-public class MeetingsController {
-
-    @RequestMapping("/meetings")
-    public String events(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-
+public class ContactsController {
+    @RequestMapping("/contacts")
+    public String contacts(Model model, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         HttpSession session = request.getSession();
+
         boolean isLoggedIn = false;
         if( session.getAttribute("userName") != null ){
             isLoggedIn = true;
             model.addAttribute("isLoggedIn", isLoggedIn);
         }
+
 
         TokenResponse tokens = (TokenResponse)session.getAttribute("tokens");
         if (tokens == null) {
@@ -41,25 +41,23 @@ public class MeetingsController {
 
         IOutlookService outlookService = OutlookServiceBuilder.getOutlookService(tokens.getAccessToken(), email);
 
-        // Sort by start time in descending order
-        String sort = "start/dateTime DESC";
+        // Sort by given name in ascending order (A-Z)
+        String sort = "GivenName ASC";
         // Only return the properties we care about
-        String properties = "organizer,subject,start,end";
-        // Return at most 10 events
+        String properties = "GivenName,Surname,CompanyName,EmailAddresses";
+        // Return at most 10 contacts
         Integer maxResults = 100;
 
         try {
-            PagedResult<Event> events = outlookService.getEvents(
+            PagedResult<Contact> contacts = outlookService.getContacts(
                     sort, properties, maxResults)
-                    .execute()
-                    .body();
-
-            model.addAttribute("meetings", events.getValue());
+                    .execute().body();
+            model.addAttribute("contacts", contacts.getValue());
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/";
         }
 
-        return "meetings";
+        return "contacts";
     }
 }

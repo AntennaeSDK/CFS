@@ -4,24 +4,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
+<%@ page import="org.github.antennae.cfs.microsoft.Contact" %>
+<%@ page import="org.github.antennae.cfs.microsoft.EmailAddress" %>
 
 <%
-    boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
-    String name = (String) request.getAttribute("name");
-    String email = (String) request.getAttribute("email");
+Boolean isLoggedIn = (Boolean) request.getAttribute("isLoggedIn");
+Contact[] contacts = (Contact[]) request.getAttribute("contacts");
+
+System.out.println("loggedin = "+ isLoggedIn );
+System.out.println("contacts = " + contacts.length);
 %>
 
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-          crossorigin="anonymous" />
+          crossorigin="anonymous"/>
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
             integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
@@ -33,7 +36,7 @@
             integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/main.css"/>
 
 
 </head>
@@ -47,10 +50,10 @@
                     <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/meetings">meeting</a>
+                    <a class="nav-link" href="/mail">Mail</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/mail">mail</a>
+                    <a class="nav-link" href="/meetings">Meetings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/contacts">Contacts</a>
@@ -63,9 +66,9 @@
                 </li>
                 <li class="nav-item">
                     <%if(isLoggedIn){%>
-                        <a class="nav-link" href="/logout" >Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                     <%}else{%>
-                        <a class="nav-link" href="${loginUrl}" >Login</a>
+                    <a class="nav-link" href="/login">Login</a>
                     <%}%>
                 </li>
             </ul>
@@ -77,22 +80,39 @@
         <div class="col-lg-12">
             <h3>Microsoft Auth</h3>
 
-                <p>Login Successful</p>
-
-                <div>
-                    <p>Name: <%=name%> </p>
-                    <p>Email: <%=email%> </p>
-                </div>
-                <!--
-                <p>AuthCode</p>
-                <p>${authCode}"</p>
-
-                <p>ID Token</p>
-                <p>${idToken}</p>
-
-                <p>Access Token</p>
-                <p>${accessToken}</p>
-                -->
+            <B>Contacts</B>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><span class="glyphicon glyphicon-envelope"></span></th>
+                    <th>Nambi</th>
+                    <th>Company</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%for( Contact m : contacts){%>
+                <tr class="info">
+                    <td>
+                        <span class="glyphicon glyphicon-envelope"></span>
+                    </td>
+                    <td>
+                        <%=m.getGivenName()%>
+                    </td>
+                    <td>
+                        <%=m.getSurname()%>
+                    </td>
+                    <td>
+                        <ul>
+                            <% for( EmailAddress e : m.getEmailAddresses()){ %>
+                            <li><%=e.getAddress()%></li>
+                            <%}%>
+                        </ul>
+                    </td>
+                </tr>
+                <%}%>
+                </tbody>
+            </table>
         </div>
     </div>
 
