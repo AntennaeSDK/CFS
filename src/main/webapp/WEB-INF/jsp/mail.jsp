@@ -18,13 +18,12 @@ System.out.println("messages = " + messages.length);
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-          crossorigin="anonymous" />
+          crossorigin="anonymous"/>
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
             integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
@@ -36,7 +35,7 @@ System.out.println("messages = " + messages.length);
             integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/main.css"/>
 
 
 </head>
@@ -50,7 +49,10 @@ System.out.println("messages = " + messages.length);
                     <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/mail">mail</a>
+                    <a class="nav-link" href="/mail">Mail</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/meetings">Meetings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">APIs</a>
@@ -60,9 +62,9 @@ System.out.println("messages = " + messages.length);
                 </li>
                 <li class="nav-item">
                     <%if(isLoggedIn){%>
-                        <a class="nav-link" href="/logout" >Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                     <%}else{%>
-                        <a class="nav-link" href="/login" >Login</a>
+                    <a class="nav-link" href="/login">Login</a>
                     <%}%>
                 </li>
             </ul>
@@ -74,21 +76,19 @@ System.out.println("messages = " + messages.length);
         <div class="col-lg-12">
             <h3>Microsoft Auth</h3>
 
-            <p>Login Successful</p>
-
+            <B>Inbox</B>
             <table class="table">
-                <caption>Inbox</caption>
                 <thead>
-                <tr>
-                    <th><span class="glyphicon glyphicon-envelope"></span></th>
-                    <th>From</th>
-                    <th>Subject</th>
-                    <th>Received</th>
-                    <th>Preview</th>
-                </tr>
+                    <tr>
+                        <th><span class="glyphicon glyphicon-envelope"></span></th>
+                        <th>From</th>
+                        <th>Subject</th>
+                        <th>Received</th>
+                        <th>Preview</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <%for( Message m : messages){%>
+                    <%for( Message m : messages){%>
                     <tr class="info">
                         <td>
                             <span class="glyphicon glyphicon-envelope"></span>
@@ -106,8 +106,7 @@ System.out.println("messages = " + messages.length);
                             <%=m.getBodyPreview()%>
                         </td>
                     </tr>
-                <%}%>
-
+                    <%}%>
                 </tbody>
             </table>
         </div>

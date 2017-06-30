@@ -52,7 +52,7 @@ public class MicrosoftAuthorizeController {
                 if (idTokenObj != null) {
 
                     TokenResponse tokenResponse = AuthHelper.getTokenFromAuthCode(authCode, idTokenObj.getTenantId());
-                    session.setAttribute("tokenS", tokenResponse);
+                    session.setAttribute("tokens", tokenResponse);
                     session.setAttribute("userConnected", true);
                     session.setAttribute("userName", idTokenObj.getName());
                     session.setAttribute("userTenantId", idTokenObj.getTenantId());
