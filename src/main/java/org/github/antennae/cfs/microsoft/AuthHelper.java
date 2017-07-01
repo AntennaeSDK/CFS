@@ -28,7 +28,7 @@ public class AuthHelper {
             "offline_access",
             "profile",
             "User.Read",
-            "User.Read.All",
+            //"User.Read.All",
             "User.ReadBasic.All",
             "Mail.Read",
             "Calendars.Read",

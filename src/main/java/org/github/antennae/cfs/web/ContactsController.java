@@ -58,6 +58,6 @@ public class ContactsController {
             return "redirect:/";
         }
 
-        return "contacts";
+        return "tiles.contacts";
     }
 }

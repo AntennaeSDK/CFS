@@ -60,6 +60,6 @@ public class MeetingsController {
             return "redirect:/";
         }
 
-        return "meetings";
+        return "tiles.meetings";
     }
 }

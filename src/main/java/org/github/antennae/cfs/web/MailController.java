@@ -67,6 +67,6 @@ public class MailController {
             return "redirect:/index.html";
         }
 
-        return "mail";
+        return "tiles.mail";
     }
 }

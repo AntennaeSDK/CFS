@@ -55,7 +55,7 @@ public class HomeController {
         model.addAttribute("loginUrl", loginUrl);
         model.addAttribute("isLoggedIn", isLoggedIn);
 
-        return "home1";
+        return "tiles.homepage";
     }
 
     @RequestMapping("/logout")
