@@ -4,6 +4,7 @@ package org.github.antennae.cfs.web;
 import org.github.antennae.cfs.microsoft.AuthHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.MissingRequiredPropertiesException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -45,15 +47,23 @@ public class HomeController {
             isLoggedIn = true;
         }
 
-        String loginUrl = AuthHelper.getLoginUrl(state, nonce);
+        String loginUrl = null;
+        String error = null;
+        try {
+            loginUrl = AuthHelper.getLoginUrl(state, nonce);
+        } catch ( MissingRequiredPropertiesException e) {
+            e.printStackTrace();
+            error = e.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+            error = e.getMessage();
+        }
+
         logger.info("Microsoft Login URL: "+ loginUrl );
-
-        //Map<String,String> env = System.getenv();
-        //System.out.println("ENV \n"+ env);
-
 
         model.addAttribute("loginUrl", loginUrl);
         model.addAttribute("isLoggedIn", isLoggedIn);
+        model.addAttribute("error", error);
 
         return "tiles.homepage";
     }

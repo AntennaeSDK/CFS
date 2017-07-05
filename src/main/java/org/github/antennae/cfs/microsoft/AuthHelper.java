@@ -12,6 +12,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.MissingRequiredPropertiesException;
 import org.springframework.web.util.UriComponentsBuilder;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -39,43 +40,25 @@ public class AuthHelper {
     private static String appPassword = null;
     private static String redirectUrl = null;
 
-    private static String getAppId() {
+    private static String getAppId() throws IOException {
         if (appId == null) {
-            try {
-                loadConfig();
-            } catch (Exception e) {
-                return null;
-            }
+            loadConfig();
         }
-
-        //System.out.println("APPID: ["+ appId+ "]");
 
         return appId;
     }
-    private static String getAppPassword() {
+    private static String getAppPassword() throws IOException {
         if (appPassword == null) {
-            try {
-                loadConfig();
-            } catch (Exception e) {
-                return null;
-            }
+            loadConfig();
         }
-
-        //System.out.println("APP_PASSWORD: ["+ appPassword + "]");
 
         return appPassword;
     }
 
-    private static String getRedirectUrl() {
+    private static String getRedirectUrl() throws IOException {
         if (redirectUrl == null) {
-            try {
-                loadConfig();
-            } catch (Exception e) {
-                return null;
-            }
+            loadConfig();
         }
-
-        //System.out.println("REDIRECT_URL: ["+ redirectUrl + "]");
 
         return redirectUrl;
     }
@@ -134,14 +117,27 @@ public class AuthHelper {
                 authConfigStream.close();
             }
         }
-        else {
-            throw new FileNotFoundException("Property file '" + authConfigFile + "' not found in the classpath.");
+
+        MissingRequiredPropertiesException exception = new MissingRequiredPropertiesException();
+        if( appId == null || appId.trim().equals("") ){
+            exception.getMissingRequiredProperties().add("appId for microsoft office 365 is missing.");
+        }
+        if( appPassword == null || appPassword.trim().equals("")){
+            exception.getMissingRequiredProperties().add("appPassword for microsoft office 365 is missing.");
+        }
+        if( redirectUrl == null || redirectUrl.trim().equals("")){
+            exception.getMissingRequiredProperties().add("RedirectURL for microsoft office 365 is missing.");
+        }
+
+        if( exception.getMissingRequiredProperties().size() > 0 ){
+            throw exception;
         }
     }
 
-    public static String getLoginUrl(UUID state, UUID nonce) {
+    public static String getLoginUrl(UUID state, UUID nonce) throws IOException {
 
         UriComponentsBuilder urlBuilder = UriComponentsBuilder.fromHttpUrl(authorizeUrl);
+
         urlBuilder.queryParam("client_id", getAppId());
         urlBuilder.queryParam("redirect_uri", getRedirectUrl());
         urlBuilder.queryParam("response_type", "code id_token");
