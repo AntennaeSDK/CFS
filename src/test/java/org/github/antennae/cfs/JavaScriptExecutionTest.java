@@ -2,6 +2,8 @@ package org.github.antennae.cfs;
 
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import org.github.antennae.cfs.util.JavascriptParser;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -84,11 +86,16 @@ public class JavaScriptExecutionTest {
 
             json.getMember("name");
 
+            JSONObject jsonObject = new JSONObject(json);
+            Object name = jsonObject.get("username");
+
             Assert.assertNotNull(json);
 
         } catch (ScriptException e) {
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
