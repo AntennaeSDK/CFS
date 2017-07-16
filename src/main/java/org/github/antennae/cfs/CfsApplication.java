@@ -10,7 +10,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
  * NOTE : DO not add @EnableWebMvc it breaks static content delivery ( no idea why )
  */
 @SpringBootApplication
-//@EnableWebMvc
 public class CfsApplication extends SpringBootServletInitializer {
 
 
