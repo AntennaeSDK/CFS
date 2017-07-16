@@ -7,13 +7,14 @@
     <!-- Templates -->
 
     <definition name="layout.basic" template="/WEB-INF/tiles/layout/basic.jsp">
-        <put-attribute name="title" value="CFS with Tiles" />
+        <put-attribute name="title" value="ManBot" />
         <put-attribute name="header" value="/WEB-INF/tiles/view/header.jsp" />
         <put-attribute name="body" value="" />
         <put-attribute name="footer" value="/WEB-INF/tiles/view/footer.jsp" />
     </definition>
 
     <!-- Pages -->
+
     <definition name="tiles.homepage" extends="layout.basic">
         <put-attribute name="body" value="/WEB-INF/tiles/view/page/home.jsp" />
     </definition>

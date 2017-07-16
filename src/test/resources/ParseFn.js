@@ -1,4 +1,6 @@
-function parse( jsonStr ){
+function getHeader( jsonStr ){
+
     var json = JSON.parse(jsonStr);
-    return json;
+
+    return json.menu.header;
 }

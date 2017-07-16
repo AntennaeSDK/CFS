@@ -21,11 +21,26 @@ public class JavascriptParser {
         jsEngine.eval(parseFn);
     }
 
+    public void addFunction(String jsFunction) throws ScriptException {
+        jsEngine.eval(jsFunction);
+    }
+
 
     public Object parse( String json ) throws ScriptException, NoSuchMethodException {
 
         Invocable inv = (Invocable) jsEngine;
         Object result = ((Invocable) jsEngine).invokeFunction("parseJSON", json);
+
+        System.out.println("JSON "+ result);
+
+        return result;
+    }
+
+    // invoked 'getHeader' function
+    public Object getHeader( String json ) throws ScriptException, NoSuchMethodException {
+
+        Invocable inv = (Invocable) jsEngine;
+        Object result = ((Invocable) jsEngine).invokeFunction("getHeader", json);
 
         System.out.println("JSON "+ result);
 
