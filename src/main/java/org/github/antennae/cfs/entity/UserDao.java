@@ -2,6 +2,8 @@ package org.github.antennae.cfs.entity;
 
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 /**
  * Created by snambi on 6/23/17.
  */
@@ -14,4 +16,8 @@ public interface UserDao extends CrudRepository<User, Long> {
      */
     User findByEmail(String email);
 
+    /*
+
+     */
+    List<User> findUsersByNameContaining(String name);
 }

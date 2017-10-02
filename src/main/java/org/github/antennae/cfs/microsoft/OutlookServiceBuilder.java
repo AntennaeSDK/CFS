@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class OutlookServiceBuilder {
 
-    public static IOutlookService getOutlookService(String accessToken, String userEmail) {
+    public static IOutlookService getOutlookService(final String accessToken, final String userEmail) {
 
 
         // Create a request interceptor to add headers that belong on
