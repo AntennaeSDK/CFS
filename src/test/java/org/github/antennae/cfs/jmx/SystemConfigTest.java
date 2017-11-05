@@ -36,16 +36,23 @@ public class SystemConfigTest {
             e.printStackTrace();
         }
 
+        int count = 0;
         do{
             try {
-                Thread.sleep(TimeUnit.MINUTES.toMillis(2));
+                Thread.sleep(TimeUnit.SECONDS.toMillis(10));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
             System.out.println("Thread Count="+mBean.getThreadCount()+":::Schema Name="+mBean.getName());
 
-        }while(mBean.getThreadCount() !=0);
+            if( mBean.getThreadCount() ==0 ){
+                break;
+            }
+
+            count++;
+
+        }while(count < 10);
 
     }
 }
