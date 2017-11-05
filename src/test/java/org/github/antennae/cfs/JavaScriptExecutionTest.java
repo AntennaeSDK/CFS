@@ -21,11 +21,13 @@ public class JavaScriptExecutionTest {
 
 
     @BeforeClass
-    public static void setUp() throws ScriptException {
+    public static void setUp() throws ScriptException, JavaScriptException {
 
         // create the JS engine
         javaScriptExecutor = new JavaScriptExecutor();
 
+        // load the Javascript file that contains JS functions
+        javaScriptExecutor.loadJavaScriptFile("ParseFn.js");
     }
 
     @Test
@@ -55,7 +57,7 @@ public class JavaScriptExecutionTest {
 
         String jsonStr = javaScriptExecutor.readFile("test.json");
 
-        javaScriptExecutor.loadJavaScriptFile("ParseFn.js");
+
 
         Object result = javaScriptExecutor.function("getHeader", jsonStr);
         System.out.println("Result: "+ result.toString());

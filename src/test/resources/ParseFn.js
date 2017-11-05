@@ -9,6 +9,13 @@ var Console = {
 
 var console = Object.create(Console);
 
+function parseJSON(str){
+
+    var json = JSON.parse(str)
+    console.log(JSON.stringify(json));
+
+    return json;
+}
 
 function getHeader( jsonStr ){
 
